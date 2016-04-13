@@ -21,7 +21,7 @@ export default React.createClass({
     console.log(this.props.data);
     var groupNodes = [1, 2, 3, 4, 5].map(function(group) {
       return (
-          <option value={group}>{group}</option>
+          <option value={group} key={group}>{group}</option>
       )
     });
     return (
@@ -29,7 +29,7 @@ export default React.createClass({
         <select onChange={this.handleChange}>
         {groupNodes}
       </select>
-        <NameList data={this.props.data} filter={this.state.filter} buttonHandler={this.props.buttonHandler}/>
+        {React.cloneElement(this.props.children, { filter: this.state.filter })}
         </div>
     );
   }

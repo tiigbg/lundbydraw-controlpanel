@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import FilterableNameList from './filterablenamelist';
+import NameList from './namelist.js';
 import $ from 'jquery';
 
 var connection = null;
 
-
 export default React.createClass({
   loadDrawingsFromServer: function() {
     $.ajax({
-      url: "http://hg-web.apache-mysql-lundby.cd66d051.svc.dockerapp.io" + "/getdrawings.php",
+      url: "/php/getdrawings.php",
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -16,38 +16,21 @@ export default React.createClass({
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error("Welp", status, err.toString());
       }.bind(this)
     });
   },
-  buttonHandler: function(name, groupid, heading) {
+  saveButtonHandler: function(drawings) {
     $.post(
-       this.props.url + "/setselections.php",
+     URL + "/php/updatedrawings.php",
       {   // Data Sending With Request To Server
-        name:name,
-        groupid:groupid,
-        heading:heading
+        drawings:drawings
       },
       function(e){
-        console.log("Success? " + e + " and " + name + " " + groupid + " " + heading);
+        console.log("Success? " + e + " and " + drawings);
       }
     );
   },
-  // loadDrawingsFromServer: function() {
-  //   r.connect( {host: this.props.url, port: 28015}, function(err, conn) {
-  //     if (err) throw err;
-  //     connection = conn;
-  //     r.db('LundbyDraw').table('drawings').run(connection, function(err, cursor) {
-  //      if (err) throw err;
-  //       cursor.toArray(function(err, result) {
-  //         if (err) throw err;
-  //         this.setState({data: result});
-  //         console.log(JSON.stringify(result, null, 2));
-  //       });
-  //     });
-  //   })
-  // },
-
   getInitialState: function() {
     return {data: [
       {"name": "Pete Hunt", "groupid": 0, "heading": "w"},
@@ -61,10 +44,12 @@ export default React.createClass({
   render: function() {
     return (
       <div className="commentBox">
-        <h1>Kontrollpanel för VR</h1>
+        <h1>Kontrollpanel2 för VR</h1>
         <h2>Namn</h2>
-        <FilterableNameList data={this.state.data} buttonHandler={this.buttonHandler}/>
-      </div>
+        <FilterableNameList data={this.state.data}>
+        <NameList data={this.state.data} saveButtonHandler={this.saveButtonHandler} type="edit"/>
+        </FilterableNameList>
+        </div>
     );
   }
 });
