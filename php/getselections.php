@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 // ini_set('display_errors', 'On');
 // error_reporting(E_ALL | E_STRICT);
-include('./hidden/config.php');
+include('./config.php');
 
 $conn = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 if(! $conn )

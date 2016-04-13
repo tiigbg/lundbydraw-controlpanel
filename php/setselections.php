@@ -6,8 +6,7 @@ $groupid = $_POST["groupid"];
 $heading = $_POST["heading"];
 $name = $_POST["name"];
 
-include('./hidden/config.php');
-// include('./hidden/function.php');
+include('./config.php');
 $conn = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 if(! $conn )
 {
