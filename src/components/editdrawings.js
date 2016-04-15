@@ -5,6 +5,8 @@ import $ from 'jquery';
 
 var connection = null;
 
+// var URL = "http://192.168.99.100"
+
 export default React.createClass({
   loadDrawingsFromServer: function() {
     $.ajax({
@@ -21,6 +23,7 @@ export default React.createClass({
     });
   },
   saveButtonHandler: function(drawings) {
+    console.log(drawing);
     $.post(
      URL + "/php/updatedrawings.php",
       {   // Data Sending With Request To Server
@@ -47,7 +50,7 @@ export default React.createClass({
         <h1>Kontrollpanel2 för VR</h1>
         <h2>Namn</h2>
         <FilterableNameList data={this.state.data}>
-        <NameList data={this.state.data} saveButtonHandler={this.saveButtonHandler} type="edit"/>
+            <NameList data={this.state.data} saveButtonHandler={this.saveButtonHandler} type="edit"/>
         </FilterableNameList>
         </div>
     );

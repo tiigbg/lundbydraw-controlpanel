@@ -9,8 +9,8 @@ import EditDrawings from './components/editdrawings';
 
   ReactDOM.render((
   <Router history={browserHistory}>
-    <Route path="/" component={EditDrawings}>
-      <Route path="edit" component={EditDrawings}/>
+    <Route path="/" component={ControlBox}>
+      <Route path="/edit" component={EditDrawings}/>
     </Route>
   </Router>
   ), document.getElementById('root'));

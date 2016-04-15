@@ -27,9 +27,23 @@ foreach($drawings as $drawing) { //foreach element in $drawings
     $heading = $drawing["heading"];
     $name = $drawing["name"];
 
-    $result = Mysql_query("UPDATE drawings
+    $testresult = mysql_query(
+        "SELECT * FROM drawings WHERE (groupid='".$groupid."' AND name= '".$name."') LIMIT 1", $conn);
+    if(mysql_fetch_array($testresult) !== false) {
+        $result = mysql_query("INSERT INTO drawings ".
+                                    "(groupid, name, heading) ".
+                                    "VALUES ".
+                              "('$groupid','$name','$heading')",$conn);
+    //     $result = mysql_query("UPDATE drawings
+    // SET drawings.groupid= '".$groupid."', drawings.name= '".$name."', drawings.heading= '".$heading."'
+    // WHERE groupid = '".$groupid."' AND name = '".$name."'", $conn);
+    }
+    else {
+        $result = mysql_query("UPDATE drawings
     SET drawings.groupid= '".$groupid."', drawings.name= '".$name."', drawings.heading= '".$heading."'
     WHERE groupid = '".$groupid."' AND name = '".$name."'", $conn);
+    }
+    return 'Available';
 
     if (! $result){
         print('Database error: ' . mysql_error());

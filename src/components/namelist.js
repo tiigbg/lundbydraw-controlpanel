@@ -15,7 +15,7 @@ export default React.createClass({
   },
   addButtonHandler: function() {
     console.log("Adding");
-    this.setState({drawings: this.state.drawings.concat([{name: "", groupid: this.props.filter, heading:""}])});
+    this.setState({drawings: this.state.drawings.concat([{name: "", groupid: this.props.filter[0], heading:""}])});
   },
   render: function() {
     var nameNodes = this.state.drawings.map(function(name, index) {

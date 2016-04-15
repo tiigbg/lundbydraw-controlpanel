@@ -4,7 +4,7 @@ FROM tutum/apache-php:latest
 MAINTAINER Jacob Michelsen <jacob.michelsen@tii.se>
 
 RUN apt-get update && \
-    apt-get -y install curl git nodejs npm
+    apt-get -y install curl git nodejs npm vim
 
 # Fix node command with a symlink
 RUN ln -s /usr/bin/nodejs /usr/bin/node
