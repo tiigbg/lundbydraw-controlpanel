@@ -5,7 +5,6 @@ import $ from 'jquery';
 
 var connection = null;
 
-// var URL = "http://192.168.99.100"
 
 export default React.createClass({
   loadDrawingsFromServer: function() {
@@ -23,16 +22,20 @@ export default React.createClass({
     });
   },
   saveButtonHandler: function(drawings) {
-    console.log(drawing);
-    $.post(
-     URL + "/php/updatedrawings.php",
-      {   // Data Sending With Request To Server
-        drawings:drawings
-      },
-      function(e){
+    console.log(drawings);
+    $.ajax
+    ({
+      type: "POST",
+      //the url where you want to sent the userName and password to
+      url: URL + "/php/updatedrawings.php",
+      dataType: 'json',
+      async: true,
+      //json object to sent to the authentication url
+      data: JSON.stringify({drawings: drawings}),
+      success: function (e) {
         console.log("Success? " + e + " and " + drawings);
       }
-    );
+    });
   },
   getInitialState: function() {
     return {data: [

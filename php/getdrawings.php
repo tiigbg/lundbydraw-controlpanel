@@ -2,7 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 // ini_set('display_errors', 'On');
 // error_reporting(E_ALL | E_STRICT);
-$groupid = $_POST["groupid"];
 include('./config.php');
 $conn = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 if(! $conn )
@@ -12,17 +11,10 @@ if(! $conn )
 mysql_select_db(DB_NAME);
 mysql_query("SET NAMES utf8");
 
-if ( $groupid) {
-    $sql =  "SELECT id, groupid, heading, name
-    FROM drawings
-    WHERE groupid = '".$groupid."'
-    ORDER BY groupid DESC";
-}
-else {
-    $sql =  "SELECT id, groupid, heading, name
-    FROM drawings
-    ORDER BY groupid DESC";
-}
+$sql =  "SELECT id, groupid, heading, name
+FROM drawings
+ORDER BY groupid DESC";
+
 $result = mysql_query($sql, $conn);
 
 if (! $result){

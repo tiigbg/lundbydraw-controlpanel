@@ -8,9 +8,9 @@ export default React.createClass({
   componentWillReceiveProps: function(newprops) {
     this.setState({drawings: newprops.data})
   },
-  handleChange: function(index, name, groupid, heading) {
-    console.log("Got " + index + " and " + name);
-    this.state.drawings[index] = {name:name, groupid: groupid, heading:heading};
+  handleChange: function(index, id, name, groupid, heading) {
+    console.log("Got " + index + " and " + name + "with id " + id);
+    this.state.drawings[index] = {name:name, id:id, groupid: groupid, heading:heading};
     this.forceUpdate();
   },
   addButtonHandler: function() {
@@ -27,16 +27,14 @@ export default React.createClass({
       console.log ("render");
       if (this.props.type == "select") {
         return (
-            <div>
             <button type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.heading + ": " + name.name}</button>
-            </div>
         );
       }
       else {
         return (
-            <div key={name.name+name.groupid}>
-            <input type="text" value={name.name} onChange = {(e) => this.handleChange(index, e.target.value, name.groupid, name.heading)}/>
-            <input type="text" value={name.heading} onChange = {(e) => this.handleChange(index, name.name, name.groupid, e.target.value)}/>
+            <div key={name.name+name.groupid+name.heading}>
+            <input type="text" value={name.name} onChange = {(e) => this.handleChange(index, name.id, e.target.value, name.groupid, name.heading)}/>
+            <input type="text" value={name.heading} onChange = {(e) => this.handleChange(index, name.id, name.name, name.groupid, e.target.value)}/>
             </div>
         );
       }

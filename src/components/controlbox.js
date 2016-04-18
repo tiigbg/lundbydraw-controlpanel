@@ -5,7 +5,6 @@ import $ from 'jquery';
 
 var connection = null;
 
-// var URL = "http://192.168.99.100"
 
 export default React.createClass({
   loadDrawingsFromServer: function() {

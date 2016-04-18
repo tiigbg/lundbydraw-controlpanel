@@ -8,7 +8,7 @@ import EditDrawings from './components/editdrawings';
 
 
   ReactDOM.render((
-  <Router history={browserHistory}>
+  <Router>
     <Route path="/" component={ControlBox}>
       <Route path="/edit" component={EditDrawings}/>
     </Route>
