@@ -5,11 +5,12 @@ import $ from 'jquery';
 
 var connection = null;
 
+var URL = "http://web.lundbydraw-apache-mysql.aa2638b9.svc.dockerapp.io";
 
 export default React.createClass({
   loadDrawingsFromServer: function() {
     $.ajax({
-      url: "/php/getdrawings.php",
+      url: URL+ "/php/getdrawings.php",
       dataType: 'json',
       cache: false,
       success: function(data) {

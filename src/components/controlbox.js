@@ -5,11 +5,12 @@ import $ from 'jquery';
 
 var connection = null;
 
+var URL = "http://web.lundbydraw-apache-mysql.aa2638b9.svc.dockerapp.io/";
 
 export default React.createClass({
   loadDrawingsFromServer: function() {
     $.ajax({
-      url: "/php/getdrawings.php",
+      url: URL + "/php/getdrawings.php",
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -23,7 +24,7 @@ export default React.createClass({
   },
   buttonHandler: function(name, groupid, heading) {
     $.post(
-       "/php/setselections.php",
+       URL + "/php/setselections.php",
       {   // Data Sending With Request To Server
         name:name,
         groupid:groupid,
@@ -34,7 +35,17 @@ export default React.createClass({
       }
     );
   },
-
+  viewButtonHandler: function(view) {
+    $.post(
+      URL + "/php/setview.php",
+      {   // Data Sending With Request To Server
+        view:view
+      },
+      function(e){
+        console.log("Success? " + e + " and " + view);
+      }
+    );
+  },
   getInitialState: function() {
     return {data: [
       {"name": "Pete Hunt", "groupid": 0, "heading": "w"},
@@ -47,11 +58,11 @@ export default React.createClass({
   },
   render: function() {
     return (
-      <div className="commentBox">
+      <div className="container commentBox">
         <h1>Kontrollpanel för VR</h1>
         <h2>Namn</h2>
         <FilterableNameList data={this.state.data}>
-            <NameList data={this.state.data} buttonHandler={this.buttonHandler} type="select"/>
+        <NameList data={this.state.data} buttonHandler={this.buttonHandler} viewButtonHandler={this.viewButtonHandler} type="select"/>
         </FilterableNameList>
       </div>
     );
