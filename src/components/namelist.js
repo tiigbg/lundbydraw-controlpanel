@@ -23,11 +23,10 @@ export default React.createClass({
       if (name.groupid != this.props.filter){
         return;
       }
-      console.log ("render");
       if (this.props.type == "select") {
         return (
           <div className="col-md-6 col-sm-12">
-            <button className=""type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.heading + ": " + name.name}</button>
+            <button className="btn-block" type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.name + ": " + name.heading}</button>
             </div>
         );
       }
@@ -48,13 +47,13 @@ export default React.createClass({
       <hr/>
         <div className="row">
       {(() => {if (this.props.type == "edit") {
-        return (<div className="col-xs-4"><button className=""type="button" onClick={this.addButtonHandler}>Add Drawing</button>
-                <button className=""type="button" onClick={() => this.props.saveButtonHandler(this.state.drawings)}>Save Changes</button></div>)
+        return (<div className="col-xs-4"><button className="btn-block" type="button" onClick={this.addButtonHandler}>Add Drawing</button>
+                <button className="btn-block" type="button" onClick={() => this.props.saveButtonHandler(this.state.drawings)}>Save Changes</button></div>)
       }
                else {
-                 return(<div><button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
-                   <button className=""type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>
-                   <button className=""type="button" onClick={() => this.props.viewButtonHandler("heli")}>Flyg i helikopter</button>
+                 return(<div className="col-xs-12"><button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
+                   <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>
+                   <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("heli")}>Flyg i helikopter</button>
                         </div>)
                }})()}
       </div></div>

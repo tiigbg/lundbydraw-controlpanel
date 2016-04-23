@@ -44,6 +44,7 @@
   "dependencies": {
     "jquery": "^2.2.2",
     "react": "^0.14.6",
+    "react-bootstrap": "^0.29.1",
     "react-dom": "^0.14.6",
     "react-router": "^2.0.1",
     "rethinkdb": "^2.2.2"
