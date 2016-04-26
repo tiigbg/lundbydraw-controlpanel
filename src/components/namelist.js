@@ -52,9 +52,16 @@ export default React.createClass({
       }
                else {
                  return(<div className="col-xs-12"><button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
-                   <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>
-                   <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("heli")}>Flyg i helikopter</button>
-                        </div>)
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("heli")}>Flyg i helikopter</button>
+                        <hr/>
+                        <h3>Mallar</h3>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("torget")}>Torget</button>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("entren")}>Entrén</button>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("kulturhuset")}>Kulturhuset</button>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("sparen")}>Spåren</button>
+                        </div>
+                       )
                }})()}
       </div></div>
     );
