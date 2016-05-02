@@ -9,7 +9,7 @@ export default React.createClass({
     this.setState({drawings: newprops.data})
   },
   handleChange: function(index, id, name, groupid, heading) {
-    console.log("Got " + index + " and " + name + "with id " + id);
+    console.log("Got " + index + " and " + name + " with id " + id + " and heading " + heading);
     this.state.drawings[index] = {name:name, id:id, groupid: groupid, heading:heading};
     this.forceUpdate();
   },
@@ -25,16 +25,26 @@ export default React.createClass({
       }
       if (this.props.type == "select") {
         return (
-          <div className="col-md-6 col-sm-12">
+            <div className="col-xs-12" key={index}>
             <button className="btn-block" type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.name + ": " + name.heading}</button>
             </div>
         );
       }
       else {
+        var radioNodes = ["torget", "entren", "kulturhuset", "sparen"].map(function(view, headingindex) {
+            return(
+                <div className="col-xs-2" key={headingindex + " and " + (name.heading === view).toString()}>
+                <input key={index} type="radio" name={view}
+                    value={view}
+                    checked={name.heading === view}
+              onChange={(e) => this.handleChange(index, name.id, name.name, name.groupid, e.currentTarget.value)}/> {view}
+              </div>
+          );
+        }.bind(this));
         return (
-            <div className="col-md-6 col-sm-12" key={name.name+name.groupid+name.heading}>
-            <input type="text" value={name.name} onChange = {(e) => this.handleChange(index, name.id, e.target.value, name.groupid, name.heading)}/>
-            <input type="text" value={name.heading} onChange = {(e) => this.handleChange(index, name.id, name.name, name.groupid, e.target.value)}/>
+            <div className="col-xs-12" key={index}>
+            <input className="col-xs-4" type="text" value={name.name} onChange = {(e) => this.handleChange(index, name.id, e.target.value, name.groupid, name.heading)}/>
+            {radioNodes}
             </div>
         );
       }
@@ -47,15 +57,18 @@ export default React.createClass({
       <hr/>
         <div className="row">
       {(() => {if (this.props.type == "edit") {
-        return (<div className="col-xs-4"><button className="btn-block" type="button" onClick={this.addButtonHandler}>Add Drawing</button>
+        return (<div className="col-xs-12"><button className="btn-block" type="button" onClick={this.addButtonHandler}>Add Drawing</button>
                 <button className="btn-block" type="button" onClick={() => this.props.saveButtonHandler(this.state.drawings)}>Save Changes</button></div>)
       }
                else {
                  return(<div className="col-xs-12"><button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
+                        <hr/>
+                        <h3>Vyer</h3>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("heli")}>Flyg i helikopter</button>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("overview")}>Översikt</button>
                         <hr/>
-                        <h3>Mallar</h3>
+                        <h3>Mall-vyer</h3>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("torget")}>Torget</button>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("entren")}>Entrén</button>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("kulturhuset")}>Kulturhuset</button>

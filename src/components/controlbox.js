@@ -60,7 +60,7 @@ export default React.createClass({
     return (
       <div className="container commentBox">
         <h1>Kontrollpanel för VR</h1>
-        <h2>Namn</h2>
+        <h3>Namn</h3>
         <FilterableNameList data={this.state.data}>
         <NameList data={this.state.data} buttonHandler={this.buttonHandler} viewButtonHandler={this.viewButtonHandler} type="select"/>
         </FilterableNameList>

@@ -7,10 +7,9 @@ import ControlBox from './components/controlbox';
 import EditDrawings from './components/editdrawings';
 
 
-  ReactDOM.render((
-  <Router>
-    <Route path="/" component={ControlBox}>
-      <Route path="/edit" component={EditDrawings}/>
-    </Route>
-  </Router>
-  ), document.getElementById('root'));
+ReactDOM.render((
+    <Router history={browserHistory}>
+        <Route path="/" component={ControlBox}/>
+            <Route path="edit" component={EditDrawings}/>
+    </Router>
+), document.getElementById('root'));

@@ -50,8 +50,9 @@ export default React.createClass({
   },
   render: function() {
     return (
-      <div className="commentBox">
-        <h1>Kontrollpanel2 för VR</h1>
+      <div className="container commentBox">
+        <h1>Kontrollpanel för VR</h1>
+        <h3>Redigera teckningsinformation</h3>
         <h2>Namn</h2>
         <FilterableNameList data={this.state.data}>
             <NameList data={this.state.data} saveButtonHandler={this.saveButtonHandler} type="edit"/>
