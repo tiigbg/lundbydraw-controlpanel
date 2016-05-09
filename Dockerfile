@@ -31,6 +31,7 @@ RUN npm run prod
 EXPOSE 80
 
 # .htaccess support
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
 
 # Start webserver
