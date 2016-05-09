@@ -30,6 +30,9 @@ RUN npm run prod
 # Expose ports. TODO: Add SSL support and expose port 443
 EXPOSE 80
 
+# .htaccess support
+RUN a2enmod rewrite
+
 # Start webserver
 # CMD are only executed when the container is started, while RUN is done when the container is initally built
 CMD ["/run.sh"]
