@@ -4,7 +4,7 @@ import NameList from './namelist';
 
 export default React.createClass({
   getInitialState: function() {
-    return {filter: -1};
+    return {filter: 1};
   },
   handleChange: function(e) {
     var options = e.target.options;

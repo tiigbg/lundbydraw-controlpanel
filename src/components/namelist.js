@@ -18,33 +18,25 @@ export default React.createClass({
     this.setState({drawings: this.state.drawings.concat([{name: "", groupid: this.props.filter[0], heading:""}])});
   },
   render: function() {
+    var alreadyRendered = [];
     var nameNodes = this.state.drawings.map(function(name, index) {
       // console.log("My id " + name.groupid + " and filter " + this.props.filter);
       if (name.groupid != this.props.filter){
         return;
       }
       if (this.props.type == "select") {
-        return (
-            <div className="col-xs-12" key={index}>
-            <button className="btn-block" type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.name + ": " + name.heading}</button>
-            </div>
-        );
+        if (alreadyRendered.indexOf(name.name) == -1) {
+          alreadyRendered.push(name.name);
+          return (
+              <button className="btn-block" key={index} type="button" onClick={() => this.props.buttonHandler(name.name, name.groupid, name.heading)} key={name.name+name.groupid+name.heading}> {name.name + ": " + name.heading}</button>
+          );
+        }
       }
       else {
-        var radioNodes = ["torget", "entren", "kulturhuset", "sparen"].map(function(view, headingindex) {
-            return(
-                <div className="col-xs-2" key={headingindex + " and " + (name.heading === view).toString()}>
-                <input key={index} type="radio" name={view}
-                    value={view}
-                    checked={name.heading === view}
-              onChange={(e) => this.handleChange(index, name.id, name.name, name.groupid, e.currentTarget.value)}/> {view}
-              </div>
-          );
-        }.bind(this));
         return (
             <div className="col-xs-12" key={index}>
-            <input className="col-xs-4" type="text" value={name.name} onChange = {(e) => this.handleChange(index, name.id, e.target.value, name.groupid, name.heading)}/>
-            {radioNodes}
+            <input type="text" value={name.name} onChange = {(e) => this.handleChange(index, name.id, e.target.value, name.groupid, name.heading)}/>
+            <input type="text" value={name.heading} onChange = {(e) => this.handleChange(index, name.id, name.name, name.groupid, e.target.value)}/>
             </div>
         );
       }
@@ -52,7 +44,9 @@ export default React.createClass({
     return (
         <div className="nameList">
         <div className="row">
+        <div className="col-xs-12">
         {nameNodes}
+      </div>
       </div>
       <hr/>
         <div className="row">
@@ -61,7 +55,9 @@ export default React.createClass({
                 <button className="btn-block" type="button" onClick={() => this.props.saveButtonHandler(this.state.drawings)}>Save Changes</button></div>)
       }
                else {
-                 return(<div className="col-xs-12"><button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
+                 return(<div className="col-xs-12">
+                        <h3>Kalibrering</h3>
+                        <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("north")}>Titta åt Norr</button>
                         <hr/>
                         <h3>Vyer</h3>
                         <button className="btn-block" type="button" onClick={() => this.props.viewButtonHandler("park")}>Stå i parken</button>

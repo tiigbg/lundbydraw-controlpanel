@@ -34,12 +34,9 @@ foreach($drawings as $drawing) { //foreach element in $drawings
     $groupid = $drawing["groupid"];
     $heading = $drawing["heading"];
     $name = $drawing["name"];
-    if ($drawing["id"]il) {
-
-    }
     echo $name;
     $testresult = mysql_query(
-        "SELECT * FROM drawings WHERE (groupid='".$groupid."' AND name= '".$name."') LIMIT 1", $conn);
+        "SELECT * FROM drawings WHERE (groupid='".$groupid."' AND name= '".$name."' AND heading= '".$heading."') LIMIT 1", $conn);
     if(mysql_fetch_array($testresult) == false) {
         $result = mysql_query("INSERT INTO drawings ".
                               "(groupid, name, heading) ".

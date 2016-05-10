@@ -47,10 +47,7 @@ export default React.createClass({
     );
   },
   getInitialState: function() {
-    return {data: [
-      {"name": "Pete Hunt", "groupid": 0, "heading": "w"},
-      {"name": "Jordan Walke", "groupid": 1, "heading": "s"}
-    ]};
+    return {data: []};
   },
   componentDidMount: function() {
     this.loadDrawingsFromServer();
